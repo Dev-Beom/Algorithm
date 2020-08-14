@@ -15,10 +15,10 @@
                 "${fileDirname}/${fileBasenameNoExtension}"
             ],
             "group": "build",
-
+ 
             //컴파일시 에러를 편집기에 반영
             //참고:   https://code.visualstudio.com/docs/editor/tasks#_defining-a-problem-matcher
-
+ 
             "problemMatcher": {
                 "fileLocation": [
                     "relative",
@@ -46,10 +46,10 @@
                 "${fileDirname}/${fileBasenameNoExtension}"
             ],
             "group": "build",
-
+ 
             //컴파일시 에러를 편집기에 반영
             //참고:   https://code.visualstudio.com/docs/editor/tasks#_defining-a-problem-matcher
-
+ 
             "problemMatcher": {
                 "fileLocation": [
                     "relative",
@@ -67,23 +67,17 @@
                 }
             }
         },
-        // 바이너리 실행(Ubuntu)
-         {
-             "label": "execute",
-             "command": "cd ${fileDirname} && ./${fileBasenameNoExtension}",
-             "group": "test"
-         }
-        // 바이너리 실행(Windows)
-        //{
-        //    "label": "execute",
-        //    "command": "cmd",
-        //    "group": "test",
-        //    "args": [
-        //        "/C", "${fileDirname}\\${fileBasenameNoExtension}"
-        //    ]
     
-        //}
+        
+        // // 바이너리 실행(Windows)
+        {
+             "label": "execute",
+            "command": "cmd",
+         "group": "test",
+            "args": [
+                "/C", "${fileDirname}\\${fileBasenameNoExtension}"
+             ]
+    
+        }
     ]
-}
-
-
+ }
