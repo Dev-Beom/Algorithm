@@ -76,7 +76,7 @@ int calc(int length)
             cout << " "; //  문제에서 제시한 예외처리.
         }
     }
-
+    delete[] parr;
     return 0;
 }
 
