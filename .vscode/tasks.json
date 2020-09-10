@@ -10,9 +10,26 @@
             "label": "save and compile for C++",
             "command": "g++",
             "args": [
-                "${file}",
-                "-o",
-                "${fileDirname}/${fileBasenameNoExtension}"
+                "-g", 
+                "${file}", 
+                "-o", 
+                "${fileDirname}/${fileBasenameNoExtension}.out", 
+                // 1. execute .out file 
+                
+                "&&", 
+                //to join building and running of the file 
+                "${fileDirname}/${fileBasenameNoExtension}.out", 
+                
+                //2. file input 
+                /* 
+                "<", 
+                "${fileDirname}/sample_input.txt" 
+                */ 
+                //3. file output 
+                /* 
+                ">", 
+                "${fileDirname}/sample_output.txt" 
+                */
             ],
             "group": "build",
 
