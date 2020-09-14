@@ -1,50 +1,64 @@
-#include <iostream>
+//시간복잡도 별 연산 횟수 그래프 : http://stackoverflow.com/questions/7830727/n-log-n-is-on
+  #include <iostream>
+  #include <ctime>
+  #include <cstdlib>
+  using namespace std;
 
-int main(int argc, char const *argv[])
-{
-    int lengthIndex[9];
-    int resultIndex[10000];
-    int input;
-    int accessCount = 0;
-    bool forStateBreak = false;
+  int algorithmA(int n);  //시간복잡도 O(1)
+  int algorithmB(int n);  //시간복잡도 O(n)
+  int algorithmC(int n);  //시간복잡도 O(n^2)
+  int main(void)
+  {
+      clock_t startTime, endTime;
+  
+      double runTime;
+      int n, result[3];
+  
+      cin >> n;
 
-    // lengthIndex[1] = 0;
+      startTime = clock();
+      result[0] = algorithmA(n);
+      endTime = clock();
 
-    // std::cout << lengthIndex[1] << sizeof(lengthIndex) / 4 << std::endl;
+      cout << "algorithmA Result: " << result[0] << endl;
+      runTime = (double)(endTime - startTime) / CLOCKS_PER_SEC;
+      cout << "algotirhmA calc time: " << runTime << endl;
 
-    for (int index = 0;; index++)
-    {
-        lengthIndex[0] = index / 100000000;              //억의 자리수
-        lengthIndex[1] = (index % 100000000) / 10000000; //천만의 자리수
-        lengthIndex[2] = (index % 10000000) / 1000000;   //백만의 자리수
-        lengthIndex[3] = (index % 1000000) / 100000;     //십만의 자리수
-        lengthIndex[4] = (index % 100000) / 10000;       //만의 자리수
-        lengthIndex[5] = (index % 10000) / 1000;         //천의 자리수
-        lengthIndex[6] = (index % 1000) / 100;           //백의 자리수
-        lengthIndex[7] = (index % 100) / 10;             //십의 자리수
-        lengthIndex[8] = (index % 10);                   //일의 자리수
-        for (int i = (sizeof(lengthIndex) / 4) - 3; i > 0; i--)
-        {
-            if (lengthIndex[i] == 6 && lengthIndex[i + 1] == 6 && lengthIndex[i + 2] == 6)
-            {
-                forStateBreak = true;
-            }
-        }
-        if (forStateBreak == true)
-        {
-            resultIndex[accessCount] = index;
-            accessCount++;
-            forStateBreak = false;
-            if (accessCount > 9999)
-            {
-                break;
-            }
-        }
-    }
-    for (;;)
-    {
-        std::cin >> input;
-        std::cout << resultIndex[input - 1] << std::endl;
-    }
-    return 0;
-}
+      startTime = clock();
+      result[1] = algorithmB(n);
+      endTime = clock();
+      
+      cout << "algorithmB Result: " << result[1] << endl;
+      runTime = (double)(endTime - startTime) / CLOCKS_PER_SEC;
+      cout << "algorithmB calc time: " << runTime << endl;
+
+      startTime = clock();
+      result[2] = algorithmC(n);
+      endTime = clock();
+      
+      cout << "algorithmC Result: " << result[2] << endl;
+      runTime = (double)(endTime - startTime) / CLOCKS_PER_SEC;
+      cout << "algorithmC calc time: " << runTime << endl;
+
+      return 0;
+  }
+
+  int algorithmA(int n)
+  {
+      return n * n;
+  }
+  int algorithmB(int n)
+  {
+      int sum = 0;
+      for (int i = 1; i <= n; i++)
+          sum += n;
+      return sum;
+  }
+  int algorithmC(int n)
+  {
+      int sum = 0;
+      for (int i = 1; i <= n; i++)
+          for (int j = 1; j <= n; j++)
+              sum += 1;
+      return sum;
+  }
