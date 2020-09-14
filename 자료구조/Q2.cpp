@@ -17,7 +17,7 @@ int main(int argc, char const *argv[])
     a.print();
     b.print();
     c.add(a, b);
-    c.display();
     c.print();
+    c.display();
     return 0;
 }

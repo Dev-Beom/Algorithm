@@ -97,7 +97,7 @@ public:
                 }
             }
         }
-        
+
         //Sort
         for (int i = 0; i < nTerms; i++)
         {
@@ -128,17 +128,5 @@ public:
             term[j].expon == 0 ? printf("[_____]") : printf("[%5d]", term[j].expon);
         }
         printf("\n");
-    }
-
-    bool isZero(float num)
-    {
-        if (num == 0)
-        {
-            return true;
-        }
-        else
-        {
-            return false;
-        }
     }
 };
