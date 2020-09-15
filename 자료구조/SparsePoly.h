@@ -11,8 +11,9 @@ class SparsePoly
 {
 
 private:
-    int max_terms;
-    int nTerms;
+    // int max_terms;
+
+    int length;
     Term *term;
 
 public:
@@ -21,16 +22,16 @@ public:
     void read()
     {
         printf("몇개 ?");
-        scanf("%d", &nTerms);
+        scanf("%d", &length);
 
-        term = new Term[nTerms];
+        term = new Term[length];
 
-        for (int i = 0; i < nTerms; i++)
+        for (int i = 0; i < length; i++)
         {
             printf("coeff[%d]: ", i);
             scanf("%f", &term[i].coeff);
         }
-        for (int i = 0; i < nTerms; i++)
+        for (int i = 0; i < length; i++)
         {
             printf("coeff[%d]: ", i);
             scanf("%d", &term[i].expon);
@@ -39,7 +40,7 @@ public:
 
     void display()
     {
-        for (int i = 0; i < nTerms; i++)
+        for (int i = 0; i < length; i++)
         {
             if (term[i].coeff != 0 && term[i].expon != 0)
             {
@@ -55,26 +56,29 @@ public:
     void add(SparsePoly a, SparsePoly b)
     {
 
-        nTerms = a.nTerms + b.nTerms;
-        int cIndex = 0;
-        term = new Term[nTerms];
-        Term *tmpTerm = new Term[nTerms];
+        length = a.length + b.length;
+
+        int index = 0; // index
+
+        term = new Term[length];
+        Term *tmpTerm = new Term[length];   //Tmp 구조
+
         //Sub
-        for (int i = 0; i < a.nTerms; i++)
+        for (int i = 0; i < a.length; i++)
         {
-            term[cIndex] = a.term[i];
-            cIndex++;
+            term[index] = a.term[i];
+            index++;
         }
-        for (int i = 0; i < b.nTerms; i++)
+        for (int i = 0; i < b.length; i++)
         {
-            term[cIndex] = b.term[i];
-            cIndex++;
+            term[index] = b.term[i];
+            index++;
         }
 
         //Sort
-        for (int i = 0; i < nTerms; i++)
+        for (int i = 0; i < length; i++)
         {
-            for (int j = i + 1; j < nTerms; j++)
+            for (int j = i + 1; j < length; j++)
             {
                 if (term[i].expon < term[j].expon)
                 {
@@ -85,10 +89,11 @@ public:
             }
         }
 
+        print();
         //Merge
-        for (int i = 0; i < nTerms; i++)
+        for (int i = 0; i < length; i++)
         {
-            for (int j = i + 1; j < nTerms; j++)
+            for (int j = i + 1; j < length; j++)
             {
                 if (term[i].expon == term[j].expon)
                 {
@@ -97,11 +102,11 @@ public:
                 }
             }
         }
-
+        print();
         //Sort
-        for (int i = 0; i < nTerms; i++)
+        for (int i = 0; i < length; i++)
         {
-            for (int j = i + 1; j < nTerms; j++)
+            for (int j = i + 1; j < length; j++)
             {
                 if (term[i].expon < term[j].expon)
                 {
@@ -111,19 +116,20 @@ public:
                 }
             }
         }
+        delete tmpTerm;
     }
 
     void print()
     {
         printf("\n");
         printf("coeff ");
-        for (int j = 0; j < nTerms; j++)
+        for (int j = 0; j < length; j++)
         {
             term[j].coeff == 0 ? printf("[_____]") : printf("[%5.1f]", term[j].coeff);
         }
         printf("\n");
         printf("expon ");
-        for (int j = 0; j < nTerms; j++)
+        for (int j = 0; j < length; j++)
         {
             term[j].expon == 0 ? printf("[_____]") : printf("[%5d]", term[j].expon);
         }
