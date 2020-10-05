@@ -1,3 +1,4 @@
+
 #include <stdio.h>
 #include "iostream"
 
@@ -50,7 +51,7 @@ bool ArrayStack::isFull()
 inline void ArrayStack::error(char *message)    //  오류 처리 함수
 {
     printf("%s\n", message);
-    exit(1);
+    exit(1);    // 프로그램 종료
 }
 
 void ArrayStack::push(int e)
