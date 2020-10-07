@@ -2,28 +2,6 @@
 
 using namespace std;
 
-// void partition(index low, index high, index &pivotpoint)
-// {
-//     index i, j;
-//     keytype pivotitem;
-//     pivotitem = S[low];
-//     j = low;
-//     for (i = low + 1; i <= high; i++)
-//     {
-//         if (S[i] < pivotitem)
-//         {
-//             j++;
-//             exchange S[i] and S[j];
-//         }
-//     }
-//     pivotpoint = j;
-//     exchange S[low] and S[pivotpoint];
-// }
-/*
-1. A, B 배열 선언하고 채워주고 S에 A랑 피봇이랑 B를 넣고 끝
-2. 이영범 C선언하고 c루프로 만들어주고 c에 s 앞엔 피봇보다 작은거 뒤엔 피봇보다 큰거
-*/
-
 void display(int length, int *arr)
 {
     for (int i = 0; i < length; i++)
@@ -109,13 +87,18 @@ void partition2(int low, int high, int &pivotPoint, int *arr)
     }    
 }
 
+void test(int row, int high){
+    int A[high - row + 1];
+    cout << A << endl;
+}
+
 int main(int argc, char const *argv[])
 {
     int length = 0;
     int low = 0;
     int high;
     int pivotPoint = 0;
-
+    // test(10, 1);
     cout << "length: ";
     cin >> length;
     high = length;
@@ -130,7 +113,9 @@ int main(int argc, char const *argv[])
     cout << "pivotPoint: S[" << pivotPoint << "] = " << S[pivotPoint] << endl;
     display(length, S);
 
-    partition2(low, high, pivotPoint, S);
+
+    partition1(low, high, pivotPoint, S);
+    // partition2(low, high, pivotPoint, S);
     display(length, S);
     return 0;
 }
