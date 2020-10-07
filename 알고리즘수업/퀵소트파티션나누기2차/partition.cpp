@@ -6,7 +6,7 @@ int *S; //  Arr S
 
 void display(int length)
 {
-    for (int i = 0; i < length; i++)
+    for (int i = 0; i <= length; i++)
     {
         cout << S[i] << " ";
     }
@@ -62,21 +62,36 @@ void partition2(int low, int high, int &pivotPoint)
 
 void partition3(int low, int high, int &pivotPoint)
 {
+    int i, j;
+    int pivotItem;
+    int tmp;
+
+    pivotItem = S[low];
+    j = low;
+    for (int i = low + 1; i <= high; i++)
+    {
+        if (S[i] < pivotItem)
+        {
+            j++;
+            tmp = S[i];
+            S[i] = S[j];
+            S[j] = tmp;
+        }
+    }
+    pivotPoint = j;
+    tmp = S[low];
+    S[low] = S[pivotPoint];
+    S[pivotPoint] = tmp;
 }
 
 void quickSort(int low, int high)
 {
     int pivotPoint;
-    cout << "퀵소트 시작! 피벗포인트 -> S[" << pivotPoint << "]" << endl;
     if (high > low)
     {
-        partition1(low, high, pivotPoint);
+        partition3(low, high, pivotPoint);
         quickSort(low, pivotPoint - 1);
         quickSort(pivotPoint + 1, high);
-    }
-    else
-    {
-        return;
     }
 }
 
@@ -84,7 +99,6 @@ int main(int argc, char const *argv[])
 {
     int low = 0;
     int high;
-    int pivotPoint = 0;
     int length = 0;
 
     cout << "S length: ";
