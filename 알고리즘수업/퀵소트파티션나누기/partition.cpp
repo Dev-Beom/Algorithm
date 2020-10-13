@@ -114,8 +114,8 @@ int main(int argc, char const *argv[])
     display(length, S);
 
 
-    partition1(low, high, pivotPoint, S);
-    // partition2(low, high, pivotPoint, S);
+    // partition1(low, high, pivotPoint, S);
+    partition2(low, high, pivotPoint, S);
     display(length, S);
     return 0;
 }

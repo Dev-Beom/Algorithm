@@ -25,7 +25,7 @@ void partition1(int low, int high, int &pivotPoint)
     int index_a = 0;
     int index_b = 0;
 
-    int pivotItem = S[pivotPoint];
+    int pivotItem = S[low];
     for (int i = low + 1; i <= high; i++)
     {
         if (S[i] <= pivotItem)
@@ -58,6 +58,35 @@ void partition1(int low, int high, int &pivotPoint)
 
 void partition2(int low, int high, int &pivotPoint)
 {
+    int C[high];
+    int index_low = 0;
+    int index_high = high - 1;
+
+    int thisPivotPointItem = S[pivotPoint];
+
+    for (int i = 0; i < high; i++)
+    {
+        if (i != pivotPoint)
+        {
+            if (S[i] <= thisPivotPointItem)
+            {
+                cout << S[i] << "를 C[" << index_low << "]에 넣습니다. \n";
+                C[index_low] = S[i];
+                index_low++;
+            }
+            else if (S[i] > thisPivotPointItem)
+            {
+                cout << S[i] << "를 C[" << index_high << "]에 넣습니다. \n";
+                C[index_high] = S[i];
+                index_high--;
+            }
+        }
+    }
+    C[index_low] = thisPivotPointItem;
+    for (int i = 0; i < high; i++)
+    {
+        S[i] = C[i];
+    }
 }
 
 void partition3(int low, int high, int &pivotPoint)
@@ -79,6 +108,7 @@ void partition3(int low, int high, int &pivotPoint)
         }
     }
     pivotPoint = j;
+    cout << "Pivot Point = " << j << endl;
     tmp = S[low];
     S[low] = S[pivotPoint];
     S[pivotPoint] = tmp;
@@ -89,7 +119,7 @@ void quickSort(int low, int high)
     int pivotPoint;
     if (high > low)
     {
-        partition1(low, high, pivotPoint);
+        partition2(low, high, pivotPoint);
         quickSort(low, pivotPoint - 1);
         quickSort(pivotPoint + 1, high);
     }
