@@ -25,6 +25,7 @@ int main(int argc, char const *argv[])
     결국 Student라는 데이터에 다음 값들이 담기게 된다.
     */
 
+
     cout << stack.size() << endl;
     stack.display();
     stack.pop();

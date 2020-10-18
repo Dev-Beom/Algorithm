@@ -14,10 +14,10 @@ int main(int argc, char const *argv[])
     SparsePoly a, b, c;
     a.read();
     b.read();
-    a.print();
-    b.print();
+
+
     c.add(a, b);
-    c.print();
+
     c.display();
     return 0;
 }

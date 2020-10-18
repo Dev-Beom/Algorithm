@@ -1,0 +1,9 @@
+1234 ()
+
+void main(){
+    int i = 0;
+    if( < 10){
+
+        return (i + 1);
+    }
+}

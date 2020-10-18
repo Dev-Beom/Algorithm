@@ -1,138 +1,52 @@
 #include <stdio.h>
-#include "algorithm"
+#define MAX_TERMS	80
 
-struct Term
-{
-    int expon;
-    float coeff;
+struct Term {				// 하나의 항을 표현하는  클래스
+	int		expon;			// 항의 지수
+	float	coeff;			// 항의 계수
 };
 
-class SparsePoly
-{
-
-private:
-    // int max_terms;
-
-    int length;
-    Term *term;
+class SparsePoly {			// 희소 다항식 클래스
+	int	nTerms;				// 계수가 0이 아닌 항의 개수
+	Term term[MAX_TERMS];	// 계수가 0이 아닌 항의 배열
 
 public:
-    SparsePoly(){};
+	void read() {
+		nTerms = 0;
+		while (1) {
+			printf("계수 차수 입력(종료:-1): ");
+			scanf("%f%d", &(term[nTerms].coeff), &(term[nTerms].expon));
+			if (term[nTerms].expon < 0) {
+				display("입력 다항식:");
+				return;
+			}
+			nTerms++;
+		}
+	}
+	void add(SparsePoly a, SparsePoly b) {
+		int i, j;
 
-    void read()
-    {
-        printf("몇개 ?");
-        scanf("%d", &length);
+		nTerms = 0;
+		for (i = j = 0; i<a.nTerms || j<b.nTerms;) {
+			if (i == a.nTerms || a.term[i].expon < b.term[j].expon)
+				term[nTerms++] = b.term[j++];
+			else if (j == b.nTerms || a.term[i].expon > b.term[j].expon)
+				term[nTerms++] = a.term[i++];
+			else {
+				term[nTerms] = a.term[i++];
+				term[nTerms++].coeff += b.term[j++].coeff;
+			}
+		}
+	}
+	void display(char *str = "SPoly") {
+		int i;
+		printf("\t%s", str);
+		for (i = 0; i < nTerms; i++) {
+			printf("%5.1f", term[i].coeff);
+			if (term[i].expon > 0)
+				printf(" x^%d + ", term[i].expon);
+		}
+		printf("\n");
+	}
+} ;
 
-        term = new Term[length];
-
-        for (int i = 0; i < length; i++)
-        {
-            printf("coeff[%d]: ", i);
-            scanf("%f", &term[i].coeff);
-        }
-        for (int i = 0; i < length; i++)
-        {
-            printf("coeff[%d]: ", i);
-            scanf("%d", &term[i].expon);
-        }
-    }
-
-    void display()
-    {
-        for (int i = 0; i < length; i++)
-        {
-            if (term[i].coeff != 0 && term[i].expon != 0)
-            {
-                printf("%5.1f x^%d + ", term[i].coeff, term[i].expon);
-            }
-            else if (term[i].expon == 0 && term[i].coeff != 0)
-            {
-                printf("%4.1f\n", term[i].coeff);
-            }
-        }
-    }
-
-    void add(SparsePoly a, SparsePoly b)
-    {
-
-        length = a.length + b.length;
-
-        int index = 0; // index
-
-        term = new Term[length];
-        Term *tmpTerm = new Term[length];   //Tmp 구조
-
-        //Sub
-        for (int i = 0; i < a.length; i++)
-        {
-            term[index] = a.term[i];
-            index++;
-        }
-        for (int i = 0; i < b.length; i++)
-        {
-            term[index] = b.term[i];
-            index++;
-        }
-
-        //Sort
-        for (int i = 0; i < length; i++)
-        {
-            for (int j = i + 1; j < length; j++)
-            {
-                if (term[i].expon < term[j].expon)
-                {
-                    tmpTerm[i] = term[j];
-                    term[j] = term[i];
-                    term[i] = tmpTerm[i];
-                }
-            }
-        }
-
-        print();
-        //Merge
-        for (int i = 0; i < length; i++)
-        {
-            for (int j = i + 1; j < length; j++)
-            {
-                if (term[i].expon == term[j].expon)
-                {
-                    term[i].coeff += term[j].coeff;
-                    term[j].coeff = term[j].expon = 0;
-                }
-            }
-        }
-        print();
-        //Sort
-        for (int i = 0; i < length; i++)
-        {
-            for (int j = i + 1; j < length; j++)
-            {
-                if (term[i].expon < term[j].expon)
-                {
-                    tmpTerm[i] = term[j];
-                    term[j] = term[i];
-                    term[i] = tmpTerm[i];
-                }
-            }
-        }
-        delete tmpTerm;
-    }
-
-    void print()
-    {
-        printf("\n");
-        printf("coeff ");
-        for (int j = 0; j < length; j++)
-        {
-            term[j].coeff == 0 ? printf("[_____]") : printf("[%5.1f]", term[j].coeff);
-        }
-        printf("\n");
-        printf("expon ");
-        for (int j = 0; j < length; j++)
-        {
-            term[j].expon == 0 ? printf("[_____]") : printf("[%5d]", term[j].expon);
-        }
-        printf("\n");
-    }
-};
