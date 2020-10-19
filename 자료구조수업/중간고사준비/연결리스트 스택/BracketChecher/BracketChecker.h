@@ -26,13 +26,12 @@ bool CheckMatching(char *filename)
         nChar++;
         if (ch == '[' || ch == '(' || ch == '{')
         {
-            // stack.push(ch);
             stack.push(new Node(ch));
         }
         else if (ch == ']' || ch == ')' || ch == '}')
         {
             prev = stack.pop();
-            int data = prev->display();
+            int data = prev->getData();
             if ((ch == ']' && data != '[') || (ch == ')' && data != '(') || (ch == '}' && data != '{'))
             {
                 break;

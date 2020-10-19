@@ -1,14 +1,12 @@
 #pragma once
 
-// #include "Student.h"
-
 class Node
 {
     Node *link; //  다음 노드를 가리키는 포인터 변수. 즉, 노드가 가리키는 주소 값
-    int data;
+    double data;
 
 public:
-    Node(int val = 0) : data(val){};
+    Node(double val = 0) : data(val){};
 
     Node *getLink() //  현재 노드가 가리키는 주소값을 반환한다.
     {

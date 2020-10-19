@@ -1,6 +1,6 @@
-//후위 표기 변환 알고리즘
+//  중위식을 후위식으로 변환
 
-#include "ArrayStack.h"
+#include "LinkedStack.h"
 
 int precedence(char op)
 {
@@ -23,7 +23,9 @@ void infix2Postfix(FILE *fp = stdin)
 {
     char c, op;
     double val;
-    ArrayStack stack;
+
+    Node *tmpNode;
+    LinkedStack stack;
 
     while ((c = getc(fp)) != '\n')
     {
@@ -31,17 +33,17 @@ void infix2Postfix(FILE *fp = stdin)
         {
             ungetc(c, fp);
             fscanf(fp, "%lf", &val);
-            printf("%4.1f ", val);
+            printf("%4.1f", val);
         }
         else if (c == '(')
         {
-            stack.push(c);
+            stack.push(new Node(c));
         }
         else if (c == ')')
         {
-            while (!stack.isEmpty())    //  스택이 비어있지 않으면
+            while (!stack.isEmpty())
             {
-                op = stack.pop();
+                op = stack.pop()->getData();
                 if (op == '(')
                 {
                     break;
@@ -56,8 +58,8 @@ void infix2Postfix(FILE *fp = stdin)
         {
             while (!stack.isEmpty())
             {
-                op = stack.peek();
-                if (precedence(c) <= precedence(op))    //  우선순위 체크
+                op = stack.peek()->getData();
+                if (precedence(c) <= precedence(op))
                 {
                     printf("%c ", op);
                     stack.pop();
@@ -67,11 +69,11 @@ void infix2Postfix(FILE *fp = stdin)
                     break;
                 }
             }
-            stack.push(c);
+            stack.push(new Node(c));
         }
     }
     while (!stack.isEmpty())
     {
-        printf("%c ", stack.pop());
+        printf("%c ", stack.pop()->getData());
     }
 }
