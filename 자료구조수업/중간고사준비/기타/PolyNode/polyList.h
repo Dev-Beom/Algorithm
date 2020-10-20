@@ -29,7 +29,7 @@ public:
     {
         return getHead() == NULL;
     }
-    //pos번째 항목을 반환함
+
     Node *getEntry(int pos)
     {
         Node *n = &org;
@@ -38,20 +38,20 @@ public:
                 break;
         return n;
     }
-    //리스트의 어떤 위치에 항목 삽입
+
     void insert(int pos, Node *n)
     {
         Node *prev = getEntry(pos - 1);
         if (prev != NULL)
             prev->insertNext(n);
     }
-    //리스트의 어떤 위치의 항목 삭제
+
     Node *remove(int pos)
     {
         Node *prev = getEntry(pos - 1);
         return prev->removeNext();
     }
-    //리스트의 항목 개수 반환
+
     int size()
     {
         int count = 0;
@@ -59,7 +59,7 @@ public:
             count++;
         return count;
     }
-    void Add(polyList *that)
+    void Poly_Add(polyList *that)
     {
         polyList temp;
         int count = 0;
@@ -88,8 +88,12 @@ public:
             temp.insert(count++, new Node(p->coef, p->exp));
         for (; t != NULL; t = t->getLink())
             temp.insert(count++, new Node(t->coef, t->exp));
-        cout << "A+B =(" << temp.size() << "항)= ";
-        temp.display();
+        cout << "A+B = ";
+        temp.Poly_Print();
+        cout << endl;
+        cout << "C의 ";
+        temp.Poly_Max_Print();
+        cout << endl;
     }
     void input()
     {
@@ -97,17 +101,21 @@ public:
         float c;
         cout << "희소 다항식의 항의 개수를 입력하세요: ";
         cin >> count;
-        cout << "각 항의 계수와 지수 입력(최고차항부터 " << count << "개)" << endl;
+
         for (int i = 0; i < count; i++)
         {
             cout << i + 1 << "번째 항: 계수 지수 = ";
+
             cin >> c >> e;
+            if (e < 0)
+            {
+                c = e = -1;
+            }
             insert(i, new Node(c, e));
         }
     }
 
-    //화면에 보기 좋게 출력
-    void display()
+    void Poly_Print()
     {
         int count = 1;
         if (size() == 0)
@@ -123,5 +131,11 @@ public:
             }
             cout << endl;
         }
+    }
+
+    void Poly_Max_Print()
+    {
+        Node *p = getHead();
+        p->maxDisplay();
     }
 };
