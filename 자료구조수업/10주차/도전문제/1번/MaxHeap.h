@@ -43,7 +43,7 @@ public:
         if (isFull())
             return; //  힙이 가득 찬 경우는 연산을 중지합니다.
 
-        int i = ++size; //  증가된 힙 크기 위치에서 시작합니다.
+        int i = ++size; //  증가된 힙 크기 위치에서 시작합니다. 마지막에 넣기 위한 작업.
 
         while (i != 1 && key > getParent(i).getKey())   //  루트가 아니고 부모보다 키 값이 큰 경우
         {

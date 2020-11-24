@@ -27,7 +27,7 @@ int main(int argc, char const *argv[])
 
 
     printf("\n정렬 후:");
-    for (int i = 0; i < 10; i++)
+    for (int i = 9; i >= 0; i--)
         printf("%3d", data[i]);
     return 0;
 }
