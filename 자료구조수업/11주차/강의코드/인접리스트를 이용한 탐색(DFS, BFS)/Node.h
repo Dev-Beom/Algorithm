@@ -4,8 +4,8 @@
 class Node
 {
 protected:
-	int		id;		// Á¤Á¡ÀÇ id
-	Node*	link;	// ´ÙÀ½ ³ëµåÀÇ Æ÷ÀÎÅÍ
+	int		id;		// ì •ì ì˜ id
+	Node*	link;	// ë‹¤ìŒ ë…¸ë“œì˜ í¬ì¸í„°
 public:
 	Node( int i, Node *l=NULL ) : id(i), link(l) { }
 	~Node(void) { 

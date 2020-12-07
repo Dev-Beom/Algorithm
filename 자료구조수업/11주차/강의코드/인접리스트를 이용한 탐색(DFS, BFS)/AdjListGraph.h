@@ -4,9 +4,9 @@
 
 class AdjListGraph
 {
-	int		size;				// Á¤Á¡ÀÇ °³¼ö
-	char	vertices[MAX_VTXS];	// Á¤Á¡ Á¤º¸ (ÀÀ¿ë¿¡ µû¶ó È®Àå ÇÊ¿ä)
-	Node*	adj[MAX_VTXS];		// °¢ Á¤Á¡ÀÇ ÀÎÁ¢ ¸®½ºÆ®
+	int		size;				// ì •ì ì˜ ê°œìˆ˜
+	char	vertices[MAX_VTXS];	// ì •ì  ì •ë³´ (ì‘ìš©ì— ë”°ë¼ í™•ì¥ í•„ìš”)
+	Node*	adj[MAX_VTXS];		// ê° ì •ì ì˜ ì¸ì ‘ ë¦¬ìŠ¤íŠ¸
 
 public:
 	AdjListGraph(void) : size(0) { }
@@ -26,7 +26,7 @@ public:
 			vertices[size] = val;
 			adj[size++] = NULL;
 		}
-		else printf("Error: ±×·¡ÇÁ Á¤Á¡ °³¼ö ÃÊ°ú\n");
+		else printf("Error: ê·¸ë˜í”„ ì •ì  ê°œìˆ˜ ì´ˆê³¼\n");
 	}
 
 	void insertEdge( int u, int v) {

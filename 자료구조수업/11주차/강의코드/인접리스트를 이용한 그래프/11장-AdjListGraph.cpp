@@ -1,14 +1,14 @@
 #include "AdjListGraph.h"
 
-void main()
+int main(int argc, char const *argv[])
 {
 	AdjListGraph g;
 
 	//g.load("graph.txt");
 	for (int i = 0; i < 4; i++)
-		g.insertVertex('A' + i);	// Á¤Á¡ »ðÀÔ: 'A' 'B', ...
+		g.insertVertex('A' + i);	// ì •ì  ì‚½ìž…: 'A' 'B', ...
 	
-	g.insertEdge(0, 1);		// °£¼± »ðÀÔ
+	g.insertEdge(0, 1);		// ê°„ì„  ì‚½ìž…
 	g.insertEdge(0, 3);
 	g.insertEdge(1, 2);
 	g.insertEdge(1, 3);
@@ -16,7 +16,7 @@ void main()
 
 
 
-	printf("ÀÎÁ¢ ¸®½ºÆ®·Î Ç¥ÇöÇÑ ±×·¡ÇÁ\n");
+	printf("ì¸ì ‘ ë¦¬ìŠ¤íŠ¸ë¡œ í‘œí˜„í•œ ê·¸ëž˜í”„\n");
 	g.display();
-
+	return 0;
 }
