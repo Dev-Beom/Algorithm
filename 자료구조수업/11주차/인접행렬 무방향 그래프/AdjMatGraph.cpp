@@ -21,14 +21,14 @@ int main(int argc, char const *argv[])
 
     g.findConnectedComponent();
 
-    // printf(" DFS ==> ");
-    // g.resetVisited();
-    // g.DFS(0);
-    // printf("\n");
+    printf(" DFS ==> ");
+    g.resetVisited();
+    g.DFS(0);
+    printf("\n");
 
-    // printf(" BFS ==> ");
-    // g.resetVisited();
-    // g.BFS(0);
-    // printf("\n");
+    printf(" BFS ==> ");
+    g.resetVisited();
+    g.BFS(0);
+    printf("\n");
     return 0;
 }

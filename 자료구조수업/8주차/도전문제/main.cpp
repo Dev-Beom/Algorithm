@@ -40,5 +40,6 @@ int main(int argc, char const *argv[])
     printf("전체 노드갯수(%d)\n", tree.getCount());
     printf("단말노드 개수(%d)\n", tree.getLeafCount());
     printf("트리의 높이(%d)\n", tree.getHeight());
+    
     return 0;
 }
