@@ -23,7 +23,6 @@ public:
 
     void inputFunction();
 
-    void displayRule();
 };
 
 Rules::Rules()
@@ -52,6 +51,10 @@ string Rules::inputInterest(string inputString)
     {
         interests = "인문계통";
     }
+    else
+    {
+        interests = "NULL";
+    }
     return interests;
 }
 
@@ -61,17 +64,21 @@ string Rules::inputHobby(string inputString)
     {
         personality = "언어적";
     }
-    if (inputString == "만드는" || inputString == "수리하는" || inputString == "조정하는")
+    else if (inputString == "만드는" || inputString == "수리하는" || inputString == "조정하는")
     {
         personality = "실무적";
     }
-    if (inputString == "그리는" || inputString == "움직이는" || inputString == "듣는")
+    else if (inputString == "그리는" || inputString == "움직이는" || inputString == "듣는")
     {
         personality = "활동적";
     }
-    if (inputString == "평가하는" || inputString == "추론하는" || inputString == "조사하는")
+    else if (inputString == "평가하는" || inputString == "추론하는" || inputString == "조사하는")
     {
         personality = "분석적";
+    }
+    else
+    {
+        personality = "NULL";
     }
     return personality;
 }
@@ -80,8 +87,11 @@ string Rules::inputIsReal(string inputString)
 {
     if (inputString == "있다")
         isReal = true;
-    else
+    else if (inputString == "없다")
         isReal = false;
+    else
+        isReal = NULL;
+
     return inputString;
 }
 
@@ -111,6 +121,10 @@ string Rules::calcRecommendation()
     {
         recommendation = "디자인";
     }
+    else
+    {
+        recommendation = "NULL";
+    }
     return recommendation;
 }
 
@@ -123,6 +137,7 @@ void Rules::inputFunction()
     cin >> inputString;
     cout << inputHobby(inputString) << "입니다.\n\n실물 list -> [있다, 없다] 중 택 1\n>> " << endl;
     cin >> inputString;
-    cout << inputIsReal(inputString) << "입니다.\n\n" << endl;
+    cout << inputIsReal(inputString) << "입니다.\n\n"
+         << endl;
     cout << calcRecommendation() << "분야를 추천합니다." << endl;
 }
